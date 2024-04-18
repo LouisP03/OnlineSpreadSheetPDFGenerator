@@ -1,0 +1,35 @@
+entity UserExtended {
+    firstName String
+    lastName String
+    position String
+}
+
+entity Table {
+    name String required
+    description String
+    columns String required
+}
+
+entity Record {
+    added Instant
+    data TextBlob
+}
+
+//data:
+//
+//{
+//    "Column1": "data1",
+//    "Column2": "data2"
+//}
+
+relationship ManyToOne {
+    Table{createdBy} to UserExtended
+}
+
+relationship OneToMany {
+    Table{record} to Record{parentTable}
+}
+
+relationship OneToOne {
+    UserExtended{user} to User
+}
